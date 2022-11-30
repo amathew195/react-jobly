@@ -1,4 +1,4 @@
-
+import { useNavigate } from 'react-router-dom'
 /**
  * This component renders details for each company.
  *
@@ -12,8 +12,14 @@
 
 function CompanyCard({ company }) {
 
+  const navigate = useNavigate();
+
+  function handleClick() {
+    navigate(`/companies/${company.handle}`)
+  }
+
   return (
-    <div>
+    <div onClick={handleClick}>
       <h1>{company.name}</h1>
       <p>{company.description}</p>
       {company.logoUrl && <img src={`${company.logoUrl}`} alt="logo"></img>}

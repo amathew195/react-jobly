@@ -26,15 +26,16 @@ function CompanyDetail() {
     async function getCompanyDetails() {
       const response = await JoblyApi.getCompany(name);
       setCompanyDetails({ data: response, isLoading: false });
-      console.log(response, "response");
     }
     getCompanyDetails();
-  }, []);
+  }, [name]);
 
   if (companyDetails.isLoading) return <p>Loading...</p>;
 
   return (
     <div>
+      <h1>{companyDetails.data.name}</h1>
+      <p>{companyDetails.data.description}</p>
       {companyDetails.data.jobs.map(job => (
         <JobCardList key={uuidv4()} job={job} />
       ))}

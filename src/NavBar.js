@@ -13,8 +13,8 @@ function NavBar() {
   return (
     <nav>
       <NavLink to="/">Home</NavLink>
-      <NavLink to="/companies">Companies</NavLink>
-      <NavLink to="/jobs">Jobs</NavLink>
+      <NavLink reloadDocument to="/companies">Companies</NavLink>
+      <NavLink reloadDocument to="/jobs">Jobs</NavLink>
     </nav>
   );
 }

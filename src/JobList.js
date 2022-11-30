@@ -3,6 +3,7 @@ import JoblyApi from "./api";
 import { useEffect, useState } from 'react';
 import JobCardList from "./JobCardList";
 import { v4 as uuidv4 } from 'uuid';
+import SearchForm from "./SearchForm";
 
 /**
  * This component displays a list of all available jobs.
@@ -28,10 +29,16 @@ function JobList() {
     getJobsData();
   }, []);
 
+  async function getFilteredList(term) {
+    const response = await JoblyApi.getJobs({title: term});
+    setJobsList({ data: response, isLoading: false });
+  }
+
   if (jobsList.isLoading) return <p>Loading...</p>;
 
   return (
     <div>
+      <SearchForm onSearch={getFilteredList} />
       {jobsList.data.map(job => (
         <JobCardList key={uuidv4()} job={job} />
       ))}
