@@ -46,4 +46,14 @@ class JoblyApi {
   }
 
   // obviously, you'll add a lot here ...
+
+  /** getCompanies */
+  static async getCompanies() {
+    let res = await this.request("companies");
+    return res.companies;
+  }
 }
+
+export default JoblyApi;
+// export const getCompany= JoblyApi.getCompany;
+// export const getCompanies = JoblyApi.getCompanies;
