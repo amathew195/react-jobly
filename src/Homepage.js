@@ -1,9 +1,17 @@
 
+/**
+ * This component renders the homepage.
+ *
+ * Props: none
+ * State: none
+ *
+ * RoutesList -> Homepage
+ */
 
 function Homepage() {
   return (
     <div>
-      <p>Jobly</p>
+      <p>Jobly Homepage</p>
     </div>
   );
 }
