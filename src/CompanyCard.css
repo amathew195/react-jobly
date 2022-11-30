@@ -1,0 +1,10 @@
+.CompanyCard {
+    border: solid 1px black;
+    margin: 20px;
+}
+
+.CompanyCard:hover {
+    cursor: pointer;
+}
+
+/* add css to change mouse to pointer when you hover over button */

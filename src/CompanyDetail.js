@@ -2,7 +2,6 @@ import JoblyApi from './api';
 import JobCardList from './JobCardList';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
 
 /**
  * This component displays jobs available at a specific company.
@@ -12,13 +11,12 @@ import { v4 as uuidv4 } from 'uuid';
  *  ex. [{ data: {description, handle, jobs, logoUrl, name, numEmployees},
  * isLoading: boolean }...]
  *
- * App -> Company Detail
+ * RoutesList -> Company Detail -> JobCardList
  */
 
 function CompanyDetail() {
   const [companyDetails, setCompanyDetails] = useState({ data: null, isLoading: true });
-
-  console.log(companyDetails, "company details");
+  console.log(companyDetails, "CompanyDetails");
 
   const { name } = useParams();
 
@@ -36,9 +34,7 @@ function CompanyDetail() {
     <div>
       <h1>{companyDetails.data.name}</h1>
       <p>{companyDetails.data.description}</p>
-      {companyDetails.data.jobs.map(job => (
-        <JobCardList key={uuidv4()} job={job} />
-      ))}
+      <JobCardList jobs={companyDetails.data.jobs} />
     </div>
   );
 }

@@ -1,49 +1,62 @@
 import JoblyApi from "./api";
 import { useEffect, useState } from 'react';
 import CompanyCard from "./CompanyCard";
-import { v4 as uuidv4 } from 'uuid';
 import SearchForm from "./SearchForm";
 
 /**
- * Company list renders a list of companies.
+ * Company list renders a list of companies with a search form to search for
+ * a company by name.
  *
  * Props: none
  * State: companiesList (array of objects)
  *  ex. [{ data: [{description, handle,logoUrl, name, numEmployees}....], isLoading: boolean }...]
  *
- * Company List -> Company Card
+ * Company List -> Company Card, SearchForm
+ *
  */
 
 function CompanyList() {
   const [companiesList, setCompaniesList] = useState({ data: null, isLoading: true });
-  // const [searchValue, setSearchValue] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  console.log("company list", companiesList);
+  console.log("search term", searchTerm);
 
-  console.log("CompanyList", companiesList);
-  // console.log("searchValue", searchValue);
-
-  useEffect(function getCompaniesOnInitialRender() {
-    console.log("getting CompaniesList")
-
-    async function getCompaniesData() {
+  useEffect(function uploadCompaniesOnInitialRender() {
+    async function uploadCompaniesData() {
       const response = await JoblyApi.getCompanies();
       setCompaniesList({ data: response, isLoading: false });
     }
 
-    getCompaniesData();
+    uploadCompaniesData();
   }, []);
 
-  async function getFilteredList(term) {
-    const response = await JoblyApi.getCompanies({nameLike: term});
-    setCompaniesList({ data: response, isLoading: false });
+  function updateSearchTerm(term) {
+    setSearchTerm(term);
   }
+
+  useEffect(function uploadCompaniesOnSearch() {
+    async function uploadCompaniesData() {
+      setCompaniesList({ data: [], isLoading: true });
+      let companies;
+      if (searchTerm === "") {
+        companies = await JoblyApi.getCompanies();
+      } else {
+        companies = await JoblyApi.getCompanies({ nameLike: searchTerm });
+      }
+      setCompaniesList({ data: companies, isLoading: false });
+    }
+    uploadCompaniesData();
+  }, [searchTerm]);
+
 
   if (companiesList.isLoading) return <p>Loading...</p>;
 
   return (
     <div>
-      <SearchForm onSearch={getFilteredList} />
+      <SearchForm onSearch={updateSearchTerm} />
+      {searchTerm && <p>Searching for: {searchTerm}</p>}
       {companiesList.data.map(c => (
-        <CompanyCard key={uuidv4()} company={c} />
+        <CompanyCard key={c.handle} company={c} />
       ))}
     </div>
   );

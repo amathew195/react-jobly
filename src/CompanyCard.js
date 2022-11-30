@@ -1,4 +1,5 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import './CompanyCard.css';
 /**
  * This component renders details for each company.
  *
@@ -15,14 +16,14 @@ function CompanyCard({ company }) {
   const navigate = useNavigate();
 
   function handleClick() {
-    navigate(`/companies/${company.handle}`)
+    navigate(`/companies/${company.handle}`);
   }
 
   return (
-    <div onClick={handleClick}>
+    <div onClick={handleClick} className="CompanyCard">
       <h1>{company.name}</h1>
       <p>{company.description}</p>
-      {company.logoUrl && <img src={`${company.logoUrl}`} alt="logo"></img>}
+      {company.logoUrl && <img src={company.logoUrl} alt="logo"></img>}
     </div>
   );
 }

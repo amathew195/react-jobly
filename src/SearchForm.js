@@ -1,7 +1,16 @@
-import { useState } from 'react'
+import { useState } from 'react';
+/**
+ * This component renders a search form for users to filter through companies
+ * or jobs.
+ *
+ * Props: onSearch()
+ * State: none
+ */
 
-function SearchForm({onSearch}) {
+function SearchForm({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState("");
+  console.log(searchTerm, "searchForm");
+
 
   function handleChange(evt) {
     const { value } = evt.target;
@@ -11,7 +20,6 @@ function SearchForm({onSearch}) {
   function handleSubmit(evt) {
     evt.preventDefault();
     onSearch(searchTerm);
-    setSearchTerm("");
   }
 
   return (
@@ -26,7 +34,7 @@ function SearchForm({onSearch}) {
         <button type="submit">Submit</button>
       </form>
     </div>
-  )
+  );
 
 }
 
