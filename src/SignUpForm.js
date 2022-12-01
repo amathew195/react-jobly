@@ -30,7 +30,6 @@ function SignUpForm({ signUp }) {
     signUp(formData);
   }
 
-
   return (
     <div className="SignUpForm">
       <form onSubmit={handleSubmit}>
