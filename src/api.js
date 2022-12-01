@@ -14,18 +14,17 @@ class JoblyApi {
   // Remember, the backend needs to be authorized with a token
   // We're providing a token you can use to interact with the backend API
   // DON'T MODIFY THIS TOKEN
-  static token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-    "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-    "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+  static token;
+  // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
+  // "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
+  // "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
 
   static async request(endpoint, data = {}, method = "get") {
     console.debug("API Call:", endpoint, data, method);
 
     const url = `${BASE_URL}/${endpoint}`;
     const headers = { Authorization: `Bearer ${JoblyApi.token}` };
-    const params = (method === "get")
-      ? data
-      : {};
+    const params = method === "get" ? data : {};
 
     try {
       return (await axios({ url, method, data, params, headers })).data;
@@ -61,13 +60,56 @@ class JoblyApi {
   /** Get all jobs
    * Returns an array of jobs - [{companyHandle, companyName, equity, id, salary,
    * title}...]
-  */
+   */
   static async getJobs(data) {
     let res = await this.request("jobs", data);
     return res.jobs;
   }
 
+  /** Signup user  */
+  static async authenticateSignUpAndGetToken(data) {
+    let res = await this.request("/auth/register", data, "POST");
+    this.token = res.token;
+    return res;
+  }
+
+  /** Login user
+   * Returns token object: {token: "token"}
+   */
+  static async authenticateLoginAndGetToken(data) {
+    let res = await this.request("/auth/token", data, "POST");
+    this.token = res.token;
+    return res;
+  }
+
+  /** Get user details and returns object.
+   *
+   * {
+		username,
+		firstName,
+		lastName,
+		email,
+		isAdmin,
+		applications: []
+  } */
+  static async getUserDetails(username) {
+    let res = await this.request(`/users/${username}`);
+    return res.user;
+  }
+
+  /** Updates user details and returns object.
+   *
+   * {
+		username,
+		firstName,
+		lastName,
+		email,
+		isAdmin
+	} */
+  static async editProfileAndGetUserDetails(username, data) {
+    let res = await this.request(`users/${username}`, data, "PATCH");
+    return res.user;
+  }
 }
 
 export default JoblyApi;
-
