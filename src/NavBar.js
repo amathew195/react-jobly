@@ -38,6 +38,9 @@ function NavBar() {
             <NavLink className="nav-link" reloadDocument to="/jobs">
               Jobs
             </NavLink>
+            <NavLink className="nav-link" reloadDocument to="/signup">
+              Signup
+            </NavLink>
             {/* <NavLink className="nav-link" reloadDocument to="/">
               Logout
             </NavLink> */}

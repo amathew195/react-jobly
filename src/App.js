@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import RoutesList from "./RoutesList";
 import NavBar from "./NavBar";
 import userContext from "./userContext";
 import JoblyApi from "./api";
+import { isCompositeComponent } from "react-dom/test-utils";
 
 /**
  * This app component displays a website that allows users to navigate through
@@ -17,16 +18,31 @@ import JoblyApi from "./api";
  */
 
 function App() {
-  let initialUser = { token: null, user: null, isLoading: true };
-  const [user, setUser] = useState(initialUser);
+
+  let initialUser = { userDetails: null, isLoading: true };
+
+  const [token, setToken] = useState(null);
+  const [currentUser, setCurrentUser] = useState(initialUser);
+
+  console.log(currentUser, "currentUser");
+  console.log(token, "token");
+
+  useEffect(function updateUserDataWhenTokenChanges() {
+    if (token) {
+      async function updateUser() {
+        const user = await JoblyApi.getUserDetails();
+        setCurrentUser({ userDetails: user, isLoading: false });
+      }
+      updateUser();
+    }
+  }, [token]);
 
   async function loginUser({ username, password }) {
     const token = await JoblyApi.authenticateLoginAndGetToken({
       username,
       password,
     });
-    const user = await JoblyApi.getUserDetails();
-    setUser({ token, user, isLoading: false });
+    setToken({ token });
   }
 
   async function signUpUser({
@@ -43,15 +59,16 @@ function App() {
       lastName,
       email,
     });
-    const user = await JoblyApi.getUserDetails();
-    setUser({ token, user, isLoading: false });
+    setToken({ token });
   }
 
-  //TODO: profile
-  async function
+  function logoutUser() {
+    setToken(null);
+    setCurrentUser(initialUser);
+  }
 
   return (
-    <userContext.Provider value={user}>
+    <userContext.Provider value={currentUser}>
       <div className="App container-fluid">
         <BrowserRouter>
           <NavBar />

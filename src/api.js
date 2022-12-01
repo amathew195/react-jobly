@@ -68,7 +68,7 @@ class JoblyApi {
 
   /** Signup user  */
   static async authenticateSignUpAndGetToken(data) {
-    let res = await this.request("/auth/register", data, "POST");
+    let res = await this.request("auth/register", data, "POST");
     this.token = res.token;
     return res;
   }
@@ -77,7 +77,7 @@ class JoblyApi {
    * Returns token object: {token: "token"}
    */
   static async authenticateLoginAndGetToken(data) {
-    let res = await this.request("/auth/token", data, "POST");
+    let res = await this.request("auth/token", data, "POST");
     this.token = res.token;
     return res;
   }
@@ -85,27 +85,27 @@ class JoblyApi {
   /** Get user details and returns object.
    *
    * {
-		username,
-		firstName,
-		lastName,
-		email,
-		isAdmin,
-		applications: []
+    username,
+    firstName,
+    lastName,
+    email,
+    isAdmin,
+    applications: []
   } */
   static async getUserDetails(username) {
-    let res = await this.request(`/users/${username}`);
+    let res = await this.request(`users/${username}`);
     return res.user;
   }
 
   /** Updates user details and returns object.
    *
    * {
-		username,
-		firstName,
-		lastName,
-		email,
-		isAdmin
-	} */
+    username,
+    firstName,
+    lastName,
+    email,
+    isAdmin
+  } */
   static async editProfileAndGetUserDetails(username, data) {
     let res = await this.request(`users/${username}`, data, "PATCH");
     return res.user;
