@@ -38,6 +38,12 @@ function NavBar() {
             <NavLink className="nav-link" reloadDocument to="/jobs">
               Jobs
             </NavLink>
+            {/* <NavLink className="nav-link" reloadDocument to="/">
+              Logout
+            </NavLink> */}
+            {/* <NavLink className="nav-link" reloadDocument to="/profile">
+              Profile
+            </NavLink> */}
           </div>
         </div>
       </div>
