@@ -1,3 +1,7 @@
+.CompanyList {
+    min-height: 100vh;
+}
+
 .CompanyList-search {
     color: white;
 }
