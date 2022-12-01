@@ -1,4 +1,6 @@
 import { NavLink } from "react-router-dom";
+import userContext from "./userContext";
+import { useContext } from 'react';
 
 /**
  * Renders the navbar.
@@ -9,7 +11,11 @@ import { NavLink } from "react-router-dom";
  * App -> NavBar
  */
 
-function NavBar() {
+function NavBar({ logout }) {
+
+  const { currentUser } = useContext(userContext);
+  console.log(currentUser, "currentUser in NavBar");
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white">
       <div className="container-fluid">
@@ -38,15 +44,27 @@ function NavBar() {
             <NavLink className="nav-link" reloadDocument to="/jobs">
               Jobs
             </NavLink>
-            <NavLink className="nav-link" reloadDocument to="/signup">
-              Signup
-            </NavLink>
-            {/* <NavLink className="nav-link" reloadDocument to="/">
-              Logout
-            </NavLink> */}
-            {/* <NavLink className="nav-link" reloadDocument to="/profile">
-              Profile
-            </NavLink> */}
+
+            {!currentUser &&
+              <div>
+                <NavLink className="nav-link" reloadDocument to="/signup">
+                  Signup
+                </NavLink>
+                <NavLink className="nav-link" reloadDocument to="/login">
+                  Login
+                </NavLink>
+              </div>
+            }
+
+            {currentUser &&
+              <div>
+                <NavLink onClick={logout} className="nav-link" reloadDocument to="/">
+                  Logout {currentUser.firstName}
+                </NavLink>
+                <NavLink className="nav-link" reloadDocument to="/profile">
+                  Profile
+                </NavLink>
+              </div>}
           </div>
         </div>
       </div>

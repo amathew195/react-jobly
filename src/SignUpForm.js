@@ -1,16 +1,21 @@
 import { useState } from 'react';
 import './SignUpForm.css';
+import userContext from "./userContext";
+import { useContext } from 'react';
 
 function SignUpForm({ signUp }) {
 
   const initialState = {
-    username: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-    email: ""
+    username: "testuser_1",
+    password: "password",
+    firstName: "test",
+    lastName: "user",
+    email: "testuser5@gmail.com"
   };
+
   const [formData, setFormData] = useState(initialState);
+  const { token } = useContext(userContext);
+  console.log(token, "token in searchform");
 
   function handleChange(evt) {
     const { name, value } = evt.target;

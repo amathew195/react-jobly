@@ -1,4 +1,6 @@
 import "./Homepage.css";
+import userContext from "./userContext";
+import { useContext } from 'react';
 /**
  * This component renders the homepage.
  *
@@ -9,11 +11,16 @@ import "./Homepage.css";
  */
 
 function Homepage() {
+
+  const { currentUser } = useContext(userContext);
+
   return (
     <div className="Homepage">
       <div>
         <h1>Jobly</h1>
-        <h2>All the jobs in one, convenient place!</h2>
+        <h2>All the jobs in one, convenient place.</h2>
+        {currentUser &&
+          <h2>Welcome Back, {currentUser.firstName}!</h2>}
       </div>
     </div>
   );

@@ -70,7 +70,7 @@ class JoblyApi {
   static async authenticateSignUpAndGetToken(data) {
     let res = await this.request("auth/register", data, "POST");
     this.token = res.token;
-    return res;
+    return res.token;
   }
 
   /** Login user
@@ -79,7 +79,7 @@ class JoblyApi {
   static async authenticateLoginAndGetToken(data) {
     let res = await this.request("auth/token", data, "POST");
     this.token = res.token;
-    return res;
+    return res.token;
   }
 
   /** Get user details and returns object.
