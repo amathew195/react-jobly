@@ -1,4 +1,8 @@
 .JobCard {
     border: solid 1px black;
     margin: 20px;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 5px;
 }

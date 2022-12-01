@@ -2,6 +2,7 @@ import JoblyApi from './api';
 import JobCardList from './JobCardList';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import './CompanyDetail.css';
 
 /**
  * This component displays jobs available at a specific company.
@@ -31,9 +32,9 @@ function CompanyDetail() {
   if (companyDetails.isLoading) return <p>Loading...</p>;
 
   return (
-    <div>
+    <div className="CompanyDetail">
       <h1>{companyDetails.data.name}</h1>
-      <p>{companyDetails.data.description}</p>
+      <h6 className='CompanyDetail-desc'>{companyDetails.data.description}</h6>
       <JobCardList jobs={companyDetails.data.jobs} />
     </div>
   );

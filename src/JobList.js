@@ -3,6 +3,7 @@ import JoblyApi from "./api";
 import { useEffect, useState } from 'react';
 import JobCardList from "./JobCardList";
 import SearchForm from "./SearchForm";
+import './JobList.css';
 
 /**
  * This component displays a list of all available jobs.
@@ -52,7 +53,7 @@ function JobList() {
   if (jobsList.isLoading) return <p>Loading...</p>;
 
   return (
-    <div>
+    <div className="JobList">
       <SearchForm onSearch={updateSearchTerm} />
       <JobCardList jobs={jobsList.data} />
     </div>

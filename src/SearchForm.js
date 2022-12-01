@@ -23,7 +23,7 @@ function SearchForm({ onSearch }) {
   }
 
   return (
-    <div className="SearchForm row justify-content-center justify-content-lg-start gx-0">
+    <div className="SearchForm row justify-content-center justify-content-lg-start pt-4">
       <form onSubmit={handleSubmit}>
         <div className="input-group mb-3 px-5">
           <input

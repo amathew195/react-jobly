@@ -20,10 +20,16 @@ function CompanyCard({ company }) {
   }
 
   return (
-    <div onClick={handleClick} className="CompanyCard">
-      <h1>{company.name}</h1>
-      <p>{company.description}</p>
-      {company.logoUrl && <img src={company.logoUrl} alt="logo"></img>}
+    <div onClick={handleClick} className="CompanyCard card">
+      <div className="card-body">
+        <h6>{company.name}</h6>
+        <p><small>{company.description}</small></p>
+        {company.logoUrl &&
+          <img
+            src={company.logoUrl}
+            alt="logo"
+            className="float-end ms-5 position-absolute top-0 end-0 p-2"></img>}
+      </div>
     </div>
   );
 }

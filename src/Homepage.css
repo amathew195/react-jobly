@@ -1,7 +1,4 @@
-
-.Homepage{
-    background-image: url("/public/shubham-dhage-mjl0yIdSi18-unsplash.jpg");
-    background-size: cover;
+.Homepage {
     display: flex;
     align-items: center;
     justify-content: center;
