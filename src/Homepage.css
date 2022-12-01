@@ -1,0 +1,24 @@
+
+.Homepage{
+    background-image: url("/public/shubham-dhage-mjl0yIdSi18-unsplash.jpg");
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.Homepage h1 {
+    font-family: 'Heebo', sans-serif;
+    font-weight: 900;
+    font-size: 48px;
+    color: white;
+    text-shadow: 2px 2px 2px rgb(51, 49, 49);
+}
+
+.Homepage h2 {
+    font-family: 'Heebo', sans-serif;
+    color: white;
+    text-shadow: 2px 2px 2px rgb(51, 49, 49);
+}

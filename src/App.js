@@ -1,8 +1,8 @@
-import React from 'react';
-import './App.css';
-import { BrowserRouter } from 'react-router-dom';
-import RoutesList from './RoutesList';
-import NavBar from './NavBar';
+import React from "react";
+import "./App.css";
+import { BrowserRouter } from "react-router-dom";
+import RoutesList from "./RoutesList";
+import NavBar from "./NavBar";
 
 /**
  * This app component displays a website that allows users to navigate through
@@ -16,7 +16,7 @@ import NavBar from './NavBar';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App container-fluid">
       <BrowserRouter>
         <NavBar />
         <RoutesList />

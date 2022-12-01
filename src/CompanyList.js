@@ -1,5 +1,5 @@
 import JoblyApi from "./api";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import CompanyCard from "./CompanyCard";
 import SearchForm from "./SearchForm";
 
@@ -16,7 +16,10 @@ import SearchForm from "./SearchForm";
  */
 
 function CompanyList() {
-  const [companiesList, setCompaniesList] = useState({ data: null, isLoading: true });
+  const [companiesList, setCompaniesList] = useState({
+    data: null,
+    isLoading: true,
+  });
   const [searchTerm, setSearchTerm] = useState("");
   console.log("company list", companiesList);
   console.log("search term", searchTerm);
@@ -34,28 +37,30 @@ function CompanyList() {
     setSearchTerm(term);
   }
 
-  useEffect(function uploadCompaniesOnSearch() {
-    async function uploadCompaniesData() {
-      setCompaniesList({ data: [], isLoading: true });
-      let companies;
-      if (searchTerm === "") {
-        companies = await JoblyApi.getCompanies();
-      } else {
-        companies = await JoblyApi.getCompanies({ nameLike: searchTerm });
+  useEffect(
+    function uploadCompaniesOnSearch() {
+      async function uploadCompaniesData() {
+        setCompaniesList({ data: [], isLoading: true });
+        let companies;
+        if (searchTerm === "") {
+          companies = await JoblyApi.getCompanies();
+        } else {
+          companies = await JoblyApi.getCompanies({ nameLike: searchTerm });
+        }
+        setCompaniesList({ data: companies, isLoading: false });
       }
-      setCompaniesList({ data: companies, isLoading: false });
-    }
-    uploadCompaniesData();
-  }, [searchTerm]);
-
+      uploadCompaniesData();
+    },
+    [searchTerm]
+  );
 
   if (companiesList.isLoading) return <p>Loading...</p>;
 
   return (
-    <div>
+    <div className="CompanyList">
       <SearchForm onSearch={updateSearchTerm} />
       {searchTerm && <p>Searching for: {searchTerm}</p>}
-      {companiesList.data.map(c => (
+      {companiesList.data.map((c) => (
         <CompanyCard key={c.handle} company={c} />
       ))}
     </div>

@@ -1,4 +1,4 @@
-
+import "./Homepage.css";
 /**
  * This component renders the homepage.
  *
@@ -10,8 +10,11 @@
 
 function Homepage() {
   return (
-    <div>
-      <p>Jobly Homepage</p>
+    <div className="Homepage">
+      <div>
+        <h1>Jobly</h1>
+        <h2>All the jobs in one, convenient place!</h2>
+      </div>
     </div>
   );
 }
