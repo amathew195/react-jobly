@@ -46,7 +46,10 @@ function App() {
     [token]
   );
 
-  //TODO: docstring
+  /**
+   * loginUser accepts a username and password. It authenticates the
+   * username and password and if successful, returns a token (string).
+   */
   async function loginUser({ username, password }) {
     const token = await JoblyApi.authenticateLoginAndGetToken({
       username,
@@ -55,7 +58,11 @@ function App() {
     setToken(token);
   }
 
-  //TODO: docstring
+  /**
+   * signUpUser accepts a username, password, firstName, lastName, and email.
+   * It validates the signup information and  and if successful,
+   * returns a token (string).
+   */
   async function signUpUser({
     username,
     password,
@@ -73,7 +80,12 @@ function App() {
     setToken(token);
   }
 
-  //TODO: docstring
+  /**
+   * logoutUser allows the user to logout from their account. It resets the
+   * setToken and setCurrentUser states to the initial value/null.
+   *
+   * It accepts nothing and returns nothing.
+   */
   function logoutUser() {
     setToken(null);
     setCurrentUser(initialUser);

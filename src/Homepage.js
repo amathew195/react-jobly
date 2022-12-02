@@ -13,8 +13,6 @@ import { Link } from "react-router-dom";
 
 function Homepage() {
   const { currentUser } = useContext(userContext);
-  //TODO: Login/Signup if no currentUser
-
 
   return (
     <div className="Homepage">

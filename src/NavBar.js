@@ -4,7 +4,7 @@ import { useContext } from "react";
 
 /**
  * Renders the navbar.
- * TODO: update
+ *
  * Props: logout (function)
  * State: currentUser (object pulled from userContext)
  *  ex. {userDetails: {applications, email, firstName, isAdmin,
