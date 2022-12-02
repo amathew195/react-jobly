@@ -4,13 +4,13 @@ import { useContext } from "react";
 
 /**
  * Renders the navbar.
- *
+ * TODO: update
  * Props: none
  * State: none
  *
  * App -> NavBar
  */
-
+//TODO: reloadDocuments
 function NavBar({ logout }) {
   const { currentUser } = useContext(userContext);
   console.log(currentUser, "currentUser in NavBar");

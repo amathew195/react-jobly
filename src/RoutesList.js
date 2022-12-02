@@ -14,7 +14,7 @@ import ProfileForm from "./ProfileForm";
  * /companies/:name
  * /jobs
  * /*
- *
+ * TODO: update
  * Props: none
  * State: none
  *

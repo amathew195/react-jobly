@@ -14,11 +14,12 @@ import "./LoginForm.css";
  * RoutesList -> LoginForm
  */
 function LoginForm({ login }) {
+  //TODO: global
   const initialState = {
     username: "testuser_1",
     password: "password",
   };
-
+  //TODO: setErrors
   const [errors, seterrors] = useState();
   const [formData, setFormData] = useState(initialState);
 

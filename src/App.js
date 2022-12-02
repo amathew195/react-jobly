@@ -14,12 +14,14 @@ import jwt_decode from "jwt-decode";
  * Props - none
  * State:
  * - token: string
+ * //TODO: more specific details
  * - currentUser: {userDetails}
  *
  * App -> NavBar, RoutesList, UserContext.Provider
  */
 
 function App() {
+  // isLoading
   let initialUser = { userDetails: null };
 
   const [token, setToken] = useState();
@@ -34,6 +36,7 @@ function App() {
         const decodedToken = jwt_decode(token);
         const { username } = decodedToken;
         async function updateUser() {
+          //TODO: try catch, display friendly error to user
           const user = await JoblyApi.getUserDetails(username);
           setCurrentUser({ userDetails: user });
         }
@@ -43,6 +46,7 @@ function App() {
     [token]
   );
 
+  //TODO: docstring
   async function loginUser({ username, password }) {
     const token = await JoblyApi.authenticateLoginAndGetToken({
       username,
@@ -51,6 +55,7 @@ function App() {
     setToken(token);
   }
 
+  //TODO: docstring
   async function signUpUser({
     username,
     password,
@@ -68,10 +73,12 @@ function App() {
     setToken(token);
   }
 
+  //TODO: docstring
   function logoutUser() {
     setToken(null);
     setCurrentUser(initialUser);
   }
+
   return (
     <userContext.Provider
       value={{ currentUser: currentUser.userDetails, token }}

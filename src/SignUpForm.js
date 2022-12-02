@@ -21,7 +21,7 @@ function SignUpForm({ signUp }) {
     lastName: "user",
     email: "testuser5@gmail.com",
   };
-
+  //TODO: setErrors
   const [errors, seterrors] = useState();
   const [formData, setFormData] = useState(initialState);
   const navigate = useNavigate();

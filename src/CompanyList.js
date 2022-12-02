@@ -2,7 +2,7 @@ import JoblyApi from "./api";
 import { useEffect, useState } from "react";
 import CompanyCard from "./CompanyCard";
 import SearchForm from "./SearchForm";
-import './CompanyList.css';
+import "./CompanyList.css";
 
 /**
  * Company list renders a list of companies with a search form to search for
@@ -60,7 +60,9 @@ function CompanyList() {
   return (
     <div className="CompanyList">
       <SearchForm onSearch={updateSearchTerm} />
-      {searchTerm && <p className="CompanyList-search">Searching for: {searchTerm}</p>}
+      {searchTerm && (
+        <p className="CompanyList-search">Searching for: {searchTerm}</p>
+      )}
       {companiesList.data.map((c) => (
         <CompanyCard key={c.handle} company={c} />
       ))}
