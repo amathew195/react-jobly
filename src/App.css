@@ -9,3 +9,14 @@
   padding-right: 0rem;
   overflow: hidden;
 }
+
+.App-err {
+  min-height: 100vh;
+  font-family: 'Heebo', sans-serif;
+  color: white;
+  text-shadow: 2px 2px 2px rgb(51, 49, 49);
+  font-size: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

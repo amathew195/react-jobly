@@ -22,16 +22,20 @@ import ProfileForm from "./ProfileForm";
  */
 
 function RoutesList({ login, signUp }) {
+
+  const token = localStorage.getItem('token');
+
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />
-      <Route path="/companies" element={<CompanyList />} />
-      <Route path="/companies/:name" element={<CompanyDetail />} />
-      <Route path="/jobs" element={<JobList />} />
-      <Route path="/profile" element={<ProfileForm />} />
-      <Route path="/signup" element={<SignUpForm signUp={signUp} />} />
-      <Route path="/login" element={<LoginForm login={login} />} />
-      <Route path="/*" element={<Navigate to="/" />} />
+      <Route path="/companies" element={token ? (<CompanyList />) : (<Navigate to="/" />)} />
+      <Route path="/companies/:name" element={token ? (<CompanyDetail />) : (<Navigate to="/" />)} />
+      <Route path="/jobs" element={token ? (<JobList />) : (<Navigate to="/" />)} />
+      <Route path="/profile" element={token ? (<ProfileForm />) : (<Navigate to="/" />)} />
+      <Route path="/signup" element={token ? (<Navigate to="/" />) : (<SignUpForm signUp={signUp} />)} />
+      <Route path="/login" element={token ? (<Navigate to="/" />) : (<LoginForm login={login} />)} />
+      {/* <Route path="/companies/*" element={<Navigate to="/" />} /> */}
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 }

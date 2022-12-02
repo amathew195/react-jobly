@@ -83,6 +83,7 @@ class JoblyApi {
   }
 
   /** Get user details and returns object.
+   * Accepts username and token.
    * Returns user object: {
    * username,
    * firstName,
@@ -92,7 +93,8 @@ class JoblyApi {
    * applications: []
    * }
    */
-  static async getUserDetails(username) {
+  static async getUserDetails(username, token) {
+    this.token = token;
     let res = await this.request(`users/${username}`);
     return res.user;
   }
