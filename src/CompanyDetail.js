@@ -1,7 +1,7 @@
 import JoblyApi from './api';
 import JobCardList from './JobCardList';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import './CompanyDetail.css';
 
 /**
@@ -16,20 +16,25 @@ import './CompanyDetail.css';
  */
 
 function CompanyDetail() {
-  const [companyDetails, setCompanyDetails] = useState({ data: null, isLoading: true });
+  const [companyDetails, setCompanyDetails] = useState({ data: null, isLoading: true, err: null });
   console.log(companyDetails, "CompanyDetails");
 
   const { name } = useParams();
 
   useEffect(function getCompanyDetailsOnInitialRender() {
     async function getCompanyDetails() {
-      const response = await JoblyApi.getCompany(name);
-      setCompanyDetails({ data: response, isLoading: false });
+      try {
+        const response = await JoblyApi.getCompany(name);
+        setCompanyDetails({ data: response, isLoading: false, err: null });
+      } catch (err) {
+        setCompanyDetails({ data: null, isLoading: false, err });
+      }
     }
     getCompanyDetails();
   }, [name]);
 
   if (companyDetails.isLoading) return <p>Loading...</p>;
+  if (companyDetails.err) return <Navigate to="/companies" />;
 
   return (
     <div className="CompanyDetail col-md-8 offset-md-2">

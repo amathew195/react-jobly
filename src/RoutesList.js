@@ -6,6 +6,8 @@ import JobList from "./JobList";
 import SignUpForm from "./SignUpForm";
 import LoginForm from "./LoginForm";
 import ProfileForm from "./ProfileForm";
+import userContext from "./userContext";
+import { useContext } from "react";
 
 /**
  * Renders the following routes:
@@ -23,18 +25,25 @@ import ProfileForm from "./ProfileForm";
 
 function RoutesList({ login, signUp }) {
 
-  const token = localStorage.getItem('token');
+  const { isLoggedIn } = useContext(userContext);
 
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />
-      <Route path="/companies" element={token ? (<CompanyList />) : (<Navigate to="/" />)} />
-      <Route path="/companies/:name" element={token ? (<CompanyDetail />) : (<Navigate to="/" />)} />
-      <Route path="/jobs" element={token ? (<JobList />) : (<Navigate to="/" />)} />
-      <Route path="/profile" element={token ? (<ProfileForm />) : (<Navigate to="/" />)} />
-      <Route path="/signup" element={token ? (<Navigate to="/" />) : (<SignUpForm signUp={signUp} />)} />
-      <Route path="/login" element={token ? (<Navigate to="/" />) : (<LoginForm login={login} />)} />
-      {/* <Route path="/companies/*" element={<Navigate to="/" />} /> */}
+      {isLoggedIn &&
+        <>
+          <Route path="/companies" element={<CompanyList />} />
+          <Route path="/companies/:name" element={<CompanyDetail />} />
+          <Route path="/jobs" element={<JobList />} />
+          <Route path="/profile" element={<ProfileForm />} />
+        </>
+      }
+      {!isLoggedIn &&
+        <>
+          <Route path="/signup" element={<SignUpForm signUp={signUp} />} />
+          <Route path="/login" element={<LoginForm login={login} />} />
+        </>
+      }
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

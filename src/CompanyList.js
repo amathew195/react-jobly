@@ -20,6 +20,7 @@ function CompanyList() {
   const [companiesList, setCompaniesList] = useState({
     data: null,
     isLoading: true,
+    err: null
   });
   const [searchTerm, setSearchTerm] = useState("");
   console.log("company list", companiesList);
@@ -28,9 +29,8 @@ function CompanyList() {
   useEffect(function uploadCompaniesOnInitialRender() {
     async function uploadCompaniesData() {
       const response = await JoblyApi.getCompanies();
-      setCompaniesList({ data: response, isLoading: false });
+      setCompaniesList({ data: response, isLoading: false, err: null });
     }
-
     uploadCompaniesData();
   }, []);
 
@@ -42,13 +42,17 @@ function CompanyList() {
     function uploadCompaniesOnSearch() {
       async function uploadCompaniesData() {
         setCompaniesList({ data: [], isLoading: true });
-        let companies;
-        if (searchTerm === "") {
-          companies = await JoblyApi.getCompanies();
-        } else {
-          companies = await JoblyApi.getCompanies({ nameLike: searchTerm });
+        try {
+          let companies;
+          if (searchTerm === "") {
+            companies = await JoblyApi.getCompanies();
+          } else {
+            companies = await JoblyApi.getCompanies({ nameLike: searchTerm });
+          }
+          setCompaniesList({ data: companies, isLoading: false, err: null });
+        } catch (err) {
+          setCompaniesList({ data: null, isLoading: false, err });
         }
-        setCompaniesList({ data: companies, isLoading: false });
       }
       uploadCompaniesData();
     },
@@ -60,6 +64,12 @@ function CompanyList() {
       <div className="CompanyList-loading">
         <p>Loading...</p>
       </div>
+    );
+  }
+
+  if (companiesList.err) {
+    return (
+      <div>{companiesList.err}</div>
     );
   }
 

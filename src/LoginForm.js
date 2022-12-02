@@ -11,7 +11,8 @@ const initialState = {
 /** Form for user to enter login information
  *
  * Props:
- * - login: function
+ * - login: function that allows user to login, gets token and updates user
+ * details
  *
  * States:
  * - errors: []
@@ -21,7 +22,7 @@ const initialState = {
  */
 function LoginForm({ login }) {
 
-  const [errors, setErrors] = useState();
+  const [errors, setErrors] = useState([]);
   const [formData, setFormData] = useState(initialState);
 
   console.log("LoginFormErrors", errors);
@@ -43,7 +44,7 @@ function LoginForm({ login }) {
       navigate("/");
     } catch (err) {
       setErrors(err);
-      console.log("errors", err);
+      console.error("errors", err);
     }
   }
 
@@ -81,7 +82,7 @@ function LoginForm({ login }) {
                   <button className="btn btn-primary">Login</button>
                 </div>
               </form>
-              {errors && errors.map((e, index) => <Alert key={index} err={e} />)}
+              {errors.map((e, index) => <Alert key={index} err={e} />)}
             </div>
           </div>
         </div>

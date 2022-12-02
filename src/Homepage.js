@@ -7,19 +7,28 @@ import { Link } from "react-router-dom";
  *
  * Props: none
  * State: none
- * TODO://DOES CONTEXT COUNT AS STATE?
+ *
+ * Context:
+ * userDetails -
+ * {
+ * data: {applications, email, firstName, lastName, isAdmin, username},
+ * isLoading,
+ * err
+ * }
+ * isLoggedIn - boolean
+ *
  * RoutesList -> Homepage
  */
 
 function Homepage() {
-  const { currentUser } = useContext(userContext);
+  const { userDetails, isLoggedIn } = useContext(userContext);
 
   return (
     <div className="Homepage">
       <div>
         <h1>Jobly</h1>
         <h2>All the jobs in one, convenient place.</h2>
-        {currentUser ? <h2>Welcome Back, {currentUser.firstName}!</h2> :
+        {isLoggedIn ? <h2>Welcome Back, {userDetails.firstName}!</h2> :
           <div className="Homepage-btns">
             <Link className="btn btn-primary" to="/login">Login</Link>
             <Link className="btn btn-primary" to="/signup">Sign up</Link>

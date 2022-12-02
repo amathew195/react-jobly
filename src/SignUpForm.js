@@ -14,7 +14,7 @@ const initialState = {
 /** New user signup form.
  *
  * Props:
- * - signUp: function
+ * - signUp: function that signs up user. gets token and updates user details.
  *
  * States:
  * - errors: []
@@ -24,7 +24,7 @@ const initialState = {
  */
 function SignUpForm({ signUp }) {
 
-  const [errors, setErrors] = useState();
+  const [errors, setErrors] = useState([]);
   const [formData, setFormData] = useState(initialState);
   const navigate = useNavigate();
 

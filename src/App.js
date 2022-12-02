@@ -29,6 +29,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState(initialUser);
   console.log(currentUser, "currentUser");
 
+  const isLoggedIn = currentUser.userDetails ? true : false;
+
   useEffect(() => {
     const localToken = localStorage.getItem('token');
     if (localToken) {
@@ -50,7 +52,7 @@ function App() {
       const user = await JoblyApi.getUserDetails(username, token);
       setCurrentUser({ userDetails: user, isLoading: false, err: null });
     } catch (err) {
-      console.log(err);
+      console.error(err);
       setCurrentUser({ userDetails: null, isLoading: false, err });
     }
   }
@@ -66,7 +68,7 @@ function App() {
       password,
     });
     localStorage.setItem('token', token);
-    updateUser(token);
+    await updateUser(token);
   }
 
   /**
@@ -89,7 +91,7 @@ function App() {
       email,
     });
     localStorage.setItem('token', token);
-    updateUser(token);
+    await updateUser(token);
   }
 
   /**
@@ -109,7 +111,7 @@ function App() {
 
   return (
     <userContext.Provider
-      value={{ currentUser: currentUser.userDetails }}
+      value={{ userDetails: currentUser.userDetails, isLoggedIn }}
     >
       <div className="App container-fluid">
         <BrowserRouter>

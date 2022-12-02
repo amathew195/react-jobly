@@ -6,15 +6,19 @@ import { useContext } from "react";
  * Renders the navbar.
  *
  * Props: logout (function)
- * State: currentUser (object pulled from userContext)
- *  ex. {userDetails: {applications, email, firstName, isAdmin,
- * lastName, username}, isLoading: {boolean}}
+ * State:
+ *  - currentUser - if no current user = null, if current user = object;
+ *    ex. {userDetails: {applications, email, firstName, isAdmin,
+ *    lastName, username}, isLoading: {boolean}}
+ *  - isLoggedIn - boolean
  *
  * App -> NavBar
  */
+
 function NavBar({ logout }) {
-  const { currentUser } = useContext(userContext);
-  console.log(currentUser, "currentUser in NavBar");
+  const { userDetails, isLoggedIn } = useContext(userContext);
+  console.log(userDetails, "userDetails in NavBar");
+  console.log(isLoggedIn, "isLoggedIn");
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white">
@@ -38,23 +42,23 @@ function NavBar({ logout }) {
           id="navbarNavAltMarkup"
         >
           <div className="navbar-nav">
-            {currentUser && <NavLink className="nav-link" to="/companies">
+            {isLoggedIn && <NavLink className="nav-link" to="/companies">
               Companies
             </NavLink>}
-            {currentUser && <NavLink className="nav-link" to="/jobs">
+            {isLoggedIn && <NavLink className="nav-link" to="/jobs">
               Jobs
             </NavLink>}
-            {!currentUser && <NavLink className="nav-link" to="/signup">
+            {!isLoggedIn && <NavLink className="nav-link" to="/signup">
               Signup
             </NavLink>}
-            {!currentUser && <NavLink className="nav-link" to="/login">
+            {!isLoggedIn && <NavLink className="nav-link" to="/login">
               Login
             </NavLink>}
-            {currentUser && <NavLink onClick={logout} className="nav-link"
+            {isLoggedIn && <NavLink onClick={logout} className="nav-link"
               to="/">
-              Logout {currentUser.firstName}
+              Logout {userDetails.firstName}
             </NavLink>}
-            {currentUser && <NavLink className="nav-link" to="/profile">
+            {isLoggedIn && <NavLink className="nav-link" to="/profile">
               Profile
             </NavLink>}
           </div>
