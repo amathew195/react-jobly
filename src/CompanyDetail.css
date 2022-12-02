@@ -4,9 +4,15 @@
     font-weight: 900;
     color: white;
     text-shadow: 2px 2px 2px rgb(51, 49, 49);
+    margin-top: 20px;
 }
 
 .CompanyDetail-desc {
     font-family: 'Heebo', sans-serif;
     color: white;
+}
+
+.CompanyDetail h1,
+h6 {
+    text-align: center;
 }

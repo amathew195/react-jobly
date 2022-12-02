@@ -14,8 +14,8 @@ import ProfileForm from "./ProfileForm";
  * /companies/:name
  * /jobs
  * /*
- * TODO: update
- * Props: none
+ *
+ * Props: login, signUp (functions)
  * State: none
  *
  * App-> RoutesList

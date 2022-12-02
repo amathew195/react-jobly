@@ -19,3 +19,17 @@
     color: white;
     text-shadow: 2px 2px 2px rgb(51, 49, 49);
 }
+
+.Homepage .btn {
+    margin: 7px;
+}
+
+.Homepage h1,
+h2 {
+    text-align: center;
+}
+
+.Homepage-btns {
+    display: flex;
+    justify-content: center;
+}

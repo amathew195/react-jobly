@@ -55,10 +55,16 @@ function CompanyList() {
     [searchTerm]
   );
 
-  if (companiesList.isLoading) return <p>Loading...</p>;
+  if (companiesList.isLoading) {
+    return (
+      <div className="CompanyList-loading">
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="CompanyList">
+    <div className="CompanyList col-md-8 offset-md-2">
       <SearchForm onSearch={updateSearchTerm} />
       {searchTerm && (
         <p className="CompanyList-search">Searching for: {searchTerm}</p>

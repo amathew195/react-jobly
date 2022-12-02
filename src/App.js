@@ -7,6 +7,8 @@ import userContext from "./userContext";
 import JoblyApi from "./api";
 import jwt_decode from "jwt-decode";
 
+const initialUser = { userDetails: null, isLoading: false };
+
 /**
  * This app component displays a website that allows users to navigate through
  * companies and job listings.
@@ -14,16 +16,13 @@ import jwt_decode from "jwt-decode";
  * Props - none
  * State:
  * - token: string
- * //TODO: more specific details
- * - currentUser: {userDetails}
+ * - currentUser: {userDetails: {applications, email, firstName, isAdmin,
+ * lastName, username} isLoading: {boolean}}
  *
  * App -> NavBar, RoutesList, UserContext.Provider
  */
 
 function App() {
-  // isLoading
-  let initialUser = { userDetails: null };
-
   const [token, setToken] = useState();
   const [currentUser, setCurrentUser] = useState(initialUser);
 
@@ -36,9 +35,10 @@ function App() {
         const decodedToken = jwt_decode(token);
         const { username } = decodedToken;
         async function updateUser() {
-          //TODO: try catch, display friendly error to user
+          //TODO: add try/catch, display friendly error to user if failure
+          //to get user details
           const user = await JoblyApi.getUserDetails(username);
-          setCurrentUser({ userDetails: user });
+          setCurrentUser({ userDetails: user, isLoading: false });
         }
         updateUser();
       }

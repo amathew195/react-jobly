@@ -1,13 +1,15 @@
 .CompanyCard {
     border: solid 1px black;
     margin: 20px;
-    width: 70%;
     margin-left: auto;
     margin-right: auto;
+    transition: all 0.25s;
 }
 
 .CompanyCard:hover {
     cursor: pointer;
+    box-shadow: 0 0.5em 0.5em -0.4em rgb(85, 84, 84);
+    transform: translateY(-0.25em);
 }
 
 .CompanyCard img {

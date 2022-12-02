@@ -1,3 +1,12 @@
 .LoginForm {
     min-height: 100vh;
 }
+
+.LoginForm h3 {
+    color: white;
+    text-shadow: black 0.1em 0.1em 0.2em
+}
+
+.LoginForm .form-label {
+    font-weight: bold;
+}

@@ -50,11 +50,20 @@ function JobList() {
   }, [searchTerm]);
 
 
-  if (jobsList.isLoading) return <p>Loading...</p>;
+  if (jobsList.isLoading) {
+    return (
+      <div className="JobList-loading">
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="JobList">
+    <div className="JobList col-md-8 offset-md-2">
       <SearchForm onSearch={updateSearchTerm} />
+      {searchTerm && (
+        <p className="JobList-search">Searching for: {searchTerm}</p>
+      )}
       <JobCardList jobs={jobsList.data} />
     </div>
   );

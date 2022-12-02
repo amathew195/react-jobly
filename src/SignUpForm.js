@@ -1,6 +1,15 @@
 import { useState } from "react";
 import "./SignUpForm.css";
 import { useNavigate } from "react-router-dom";
+import Alert from "./Alert";
+
+const initialState = {
+  username: "testuser_1",
+  password: "password",
+  firstName: "test",
+  lastName: "user",
+  email: "testuser5@gmail.com",
+};
 
 /** New user signup form.
  *
@@ -14,15 +23,8 @@ import { useNavigate } from "react-router-dom";
  * RoutesList -> SignUpForm
  */
 function SignUpForm({ signUp }) {
-  const initialState = {
-    username: "testuser_1",
-    password: "password",
-    firstName: "test",
-    lastName: "user",
-    email: "testuser5@gmail.com",
-  };
-  //TODO: setErrors
-  const [errors, seterrors] = useState();
+
+  const [errors, setErrors] = useState();
   const [formData, setFormData] = useState(initialState);
   const navigate = useNavigate();
 
@@ -42,54 +44,85 @@ function SignUpForm({ signUp }) {
       await signUp(formData);
       navigate("/");
     } catch (err) {
-      seterrors(err);
+      setErrors(err);
       console.log("errors", err);
     }
   }
 
   return (
-    <div className="SignUpForm">
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username</label>
-        <input
-          id="username"
-          name="username"
-          value={formData.username}
-          onChange={handleChange}
-        ></input>
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          value={formData.password}
-          onChange={handleChange}
-        ></input>
-        <label htmlFor="first-name">First name</label>
-        <input
-          id="first-name"
-          name="firstName"
-          value={formData.firstName}
-          onChange={handleChange}
-        ></input>
-        <label htmlFor="last-name">Last name</label>
-        <input
-          name="lastName"
-          id="last-name"
-          value={formData.lastName}
-          onChange={handleChange}
-        ></input>
-        <label htmlFor="email">Email</label>
-        <input
-          name="email"
-          id="email"
-          value={formData.email}
-          onChange={handleChange}
-        ></input>
-        <button>Submit</button>
-      </form>
-      {errors && errors.map((e, index) => <p key={index}>{e}</p>)}
-    </div>
+    <div className="SignUpForm pt-5" >
+      <div>
+        <div className="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+          <h3 className="mb-3">Sign Up</h3>
+          <div className="card">
+            <div className="card-body">
+              <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                  <label htmlFor="username" className="form-label">Username</label>
+                  <input
+                    id="username"
+                    name="username"
+                    value={formData.username}
+                    onChange={handleChange}
+                    required
+                    className="form-control"
+                  ></input>
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="password" className="form-label">Password</label>
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                    className="form-control"
+                  ></input>
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="first-name" className="form-label">First name</label>
+                  <input
+                    id="first-name"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    required
+                    className="form-control"
+                  ></input>
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="last-name" className="form-label">Last name</label>
+                  <input
+                    name="lastName"
+                    id="last-name"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    required
+                    className="form-control"
+                  ></input>
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="email" className="form-label">Email</label>
+                  <input
+                    name="email"
+                    id="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="form-control"
+                  ></input>
+                </div>
+                <div className="d-grid">
+                  <button className="btn btn-primary">Submit</button>
+                </div>
+              </form>
+              {errors && errors.map((e, index) => <Alert key={index} err={e} />)}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div >
   );
 }
 

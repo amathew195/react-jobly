@@ -12,7 +12,6 @@ import JobCard from './JobCard';
  */
 
 function JobCardList({ jobs }) {
-  //TODO: key should be job id
   return (
     <div>
       {jobs.map(job => (

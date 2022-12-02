@@ -5,12 +5,13 @@ import { useContext } from "react";
 /**
  * Renders the navbar.
  * TODO: update
- * Props: none
- * State: none
+ * Props: logout (function)
+ * State: currentUser (object pulled from userContext)
+ *  ex. {userDetails: {applications, email, firstName, isAdmin,
+ * lastName, username}, isLoading: {boolean}}
  *
  * App -> NavBar
  */
-//TODO: reloadDocuments
 function NavBar({ logout }) {
   const { currentUser } = useContext(userContext);
   console.log(currentUser, "currentUser in NavBar");
@@ -37,34 +38,25 @@ function NavBar({ logout }) {
           id="navbarNavAltMarkup"
         >
           <div className="navbar-nav">
-            <NavLink className="nav-link" reloadDocument to="/companies">
+            {currentUser && <NavLink className="nav-link" to="/companies">
               Companies
-            </NavLink>
-            <NavLink className="nav-link" reloadDocument to="/jobs">
+            </NavLink>}
+            {currentUser && <NavLink className="nav-link" to="/jobs">
               Jobs
-            </NavLink>
-
-            {!currentUser && (
-              <div>
-                <NavLink className="nav-link" to="/signup">
-                  Signup
-                </NavLink>
-                <NavLink className="nav-link" to="/login">
-                  Login
-                </NavLink>
-              </div>
-            )}
-
-            {currentUser && (
-              <div>
-                <NavLink onClick={logout} className="nav-link" to="/">
-                  Logout {currentUser.firstName}
-                </NavLink>
-                <NavLink className="nav-link" to="/profile">
-                  Profile
-                </NavLink>
-              </div>
-            )}
+            </NavLink>}
+            {!currentUser && <NavLink className="nav-link" to="/signup">
+              Signup
+            </NavLink>}
+            {!currentUser && <NavLink className="nav-link" to="/login">
+              Login
+            </NavLink>}
+            {currentUser && <NavLink onClick={logout} className="nav-link"
+              to="/">
+              Logout {currentUser.firstName}
+            </NavLink>}
+            {currentUser && <NavLink className="nav-link" to="/profile">
+              Profile
+            </NavLink>}
           </div>
         </div>
       </div>
