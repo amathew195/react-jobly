@@ -18,33 +18,35 @@ import jwt_decode from "jwt-decode";
  */
 
 function App() {
-
   let initialUser = { userDetails: null, isLoading: true };
 
-  const [token, setToken] = useState({ data: null, error: null });
+  const [token, setToken] = useState();
   const [currentUser, setCurrentUser] = useState(initialUser);
 
   console.log(currentUser, "currentUser");
   console.log(token, "token");
 
-  useEffect(function updateUserDataWhenTokenChanges() {
-    if (token.data) {
-      const decodedToken = jwt_decode(token.data);
-      const { username } = decodedToken;
-      async function updateUser() {
-        const user = await JoblyApi.getUserDetails(username);
-        setCurrentUser({ userDetails: user, isLoading: false, errors: null });
+  useEffect(
+    function updateUserDataWhenTokenChanges() {
+      if (token) {
+        const decodedToken = jwt_decode(token);
+        const { username } = decodedToken;
+        async function updateUser() {
+          const user = await JoblyApi.getUserDetails(username);
+          setCurrentUser({ userDetails: user, isLoading: false });
+        }
+        updateUser();
       }
-      updateUser();
-    }
-  }, [token]);
+    },
+    [token]
+  );
 
   async function loginUser({ username, password }) {
     const token = await JoblyApi.authenticateLoginAndGetToken({
       username,
       password,
     });
-    setToken({ data: token, err: null });
+    setToken(token);
   }
 
   async function signUpUser({
@@ -54,27 +56,24 @@ function App() {
     lastName,
     email,
   }) {
-    try {
-      const tokenData = await JoblyApi.authenticateSignUpAndGetToken({
-        username,
-        password,
-        firstName,
-        lastName,
-        email,
-      });
-      setToken({ data: token, err: null });
-    } catch (err) {
-      setToken({ data: null, err });
-    }
+    const token = await JoblyApi.authenticateSignUpAndGetToken({
+      username,
+      password,
+      firstName,
+      lastName,
+      email,
+    });
+    setToken(token);
   }
 
   function logoutUser() {
     setToken(null);
     setCurrentUser(initialUser);
   }
-
   return (
-    <userContext.Provider value={{ currentUser: currentUser.userDetails, token }}>
+    <userContext.Provider
+      value={{ currentUser: currentUser.userDetails, token }}
+    >
       <div className="App container-fluid">
         <BrowserRouter>
           <NavBar logout={logoutUser} />
