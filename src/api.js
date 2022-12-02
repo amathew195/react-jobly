@@ -107,9 +107,10 @@ class JoblyApi {
    * email,
    * isAdmin
    * }
-  */
+   */
 
-  static async editProfileAndGetUserDetails(username, data) {
+  static async editProfileAndGetUserDetails(username, data, token) {
+    this.token = token;
     let res = await this.request(`users/${username}`, data, "PATCH");
     return res.user;
   }

@@ -1,0 +1,12 @@
+.ProfileForm {
+    min-height: 100vh;
+}
+
+.ProfileForm h3 {
+    color: white;
+    text-shadow: black 0.1em 0.1em 0.2em
+}
+
+.ProfileForm .form-label {
+    font-weight: bold;
+}

@@ -23,27 +23,29 @@ import { useContext } from "react";
  * App-> RoutesList
  */
 
-function RoutesList({ login, signUp }) {
-
+function RoutesList({ login, signUp, editUser }) {
   const { isLoggedIn } = useContext(userContext);
 
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />
-      {isLoggedIn &&
+      {isLoggedIn && (
         <>
           <Route path="/companies" element={<CompanyList />} />
           <Route path="/companies/:name" element={<CompanyDetail />} />
           <Route path="/jobs" element={<JobList />} />
-          <Route path="/profile" element={<ProfileForm />} />
+          <Route
+            path="/profile"
+            element={<ProfileForm editUser={editUser} />}
+          />
         </>
-      }
-      {!isLoggedIn &&
+      )}
+      {!isLoggedIn && (
         <>
           <Route path="/signup" element={<SignUpForm signUp={signUp} />} />
           <Route path="/login" element={<LoginForm login={login} />} />
         </>
-      }
+      )}
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

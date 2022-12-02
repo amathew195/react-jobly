@@ -1,34 +1,36 @@
 import { useState } from "react";
-import "./SignUpForm.css";
+import "./ProfileForm.css";
 import { useNavigate } from "react-router-dom";
 import Alert from "./Alert";
-
-const initialState = {
-  username: "testuser_1",
-  password: "password",
-  firstName: "test",
-  lastName: "user",
-  email: "testuser5@gmail.com",
-};
+import userContext from "./userContext";
+import { useContext } from "react";
 
 /** New user signup form.
  *
  * Props:
- * - signUp: function
+ * - update: function
  *
  * States:
  * - errors: []
  * - formData: {username, password}
  *
- * RoutesList -> SignUpForm
+ * RoutesList -> ProfileForm
  */
-function ProfileForm({ signUp }) {
+function ProfileForm({ editUser }) {
+  const { userDetails } = useContext(userContext);
+
+  const initialState = {
+    username: userDetails.username,
+    firstName: userDetails.firstName,
+    lastName: userDetails.lastName,
+    email: userDetails.email,
+  };
 
   const [errors, setErrors] = useState();
   const [formData, setFormData] = useState(initialState);
   const navigate = useNavigate();
 
-  console.log("SignUpErrors", errors);
+  console.log("ProfileFormErrors", errors);
 
   function handleChange(evt) {
     const { name, value } = evt.target;
@@ -41,7 +43,7 @@ function ProfileForm({ signUp }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {
-      await signUp(formData);
+      await editUser(formData);
       navigate("/");
     } catch (err) {
       setErrors(err);
@@ -50,15 +52,17 @@ function ProfileForm({ signUp }) {
   }
 
   return (
-    <div className="SignUpForm pt-5" >
+    <div className="ProfileForm pt-5">
       <div>
         <div className="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
-          <h3 className="mb-3">Sign Up</h3>
+          <h3 className="mb-3">Profile</h3>
           <div className="card">
             <div className="card-body">
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                  <label htmlFor="username" className="form-label">Username</label>
+                  <label htmlFor="username" className="form-label">
+                    Username
+                  </label>
                   <input
                     id="username"
                     name="username"
@@ -69,19 +73,9 @@ function ProfileForm({ signUp }) {
                   ></input>
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="password" className="form-label">Password</label>
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                    className="form-control"
-                  ></input>
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="first-name" className="form-label">First name</label>
+                  <label htmlFor="first-name" className="form-label">
+                    First name
+                  </label>
                   <input
                     id="first-name"
                     name="firstName"
@@ -92,7 +86,9 @@ function ProfileForm({ signUp }) {
                   ></input>
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="last-name" className="form-label">Last name</label>
+                  <label htmlFor="last-name" className="form-label">
+                    Last name
+                  </label>
                   <input
                     name="lastName"
                     id="last-name"
@@ -103,7 +99,9 @@ function ProfileForm({ signUp }) {
                   ></input>
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="email" className="form-label">Email</label>
+                  <label htmlFor="email" className="form-label">
+                    Email
+                  </label>
                   <input
                     name="email"
                     id="email"
@@ -117,12 +115,13 @@ function ProfileForm({ signUp }) {
                   <button className="btn btn-primary">Submit</button>
                 </div>
               </form>
-              {errors && errors.map((e, index) => <Alert key={index} err={e} />)}
+              {errors &&
+                errors.map((e, index) => <Alert key={index} err={e} />)}
             </div>
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 }
 

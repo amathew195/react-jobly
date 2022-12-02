@@ -25,14 +25,13 @@ const initialUser = { userDetails: null, isLoading: true, err: null };
  */
 
 function App() {
-
   const [currentUser, setCurrentUser] = useState(initialUser);
   console.log(currentUser, "currentUser");
 
   const isLoggedIn = currentUser.userDetails ? true : false;
 
   useEffect(() => {
-    const localToken = localStorage.getItem('token');
+    const localToken = localStorage.getItem("token");
     if (localToken) {
       updateUser(localToken);
     }
@@ -67,7 +66,7 @@ function App() {
       username,
       password,
     });
-    localStorage.setItem('token', token);
+    localStorage.setItem("token", token);
     await updateUser(token);
   }
 
@@ -90,7 +89,7 @@ function App() {
       lastName,
       email,
     });
-    localStorage.setItem('token', token);
+    localStorage.setItem("token", token);
     await updateUser(token);
   }
 
@@ -105,6 +104,21 @@ function App() {
     setCurrentUser(initialUser);
   }
 
+  async function editUser({ username, password, firstName, lastName, email }) {
+    const token = localStorage.getItem("token");
+    const user = await JoblyApi.editProfileAndGetUserDetails(
+      {
+        username,
+        password,
+        firstName,
+        lastName,
+        email,
+      },
+      token
+    );
+    setCurrentUser(user);
+  }
+
   if (currentUser.err) {
     return <p className="App App-err">Error: Please try again later.</p>;
   }
@@ -116,7 +130,11 @@ function App() {
       <div className="App container-fluid">
         <BrowserRouter>
           <NavBar logout={logoutUser} />
-          <RoutesList login={loginUser} signUp={signUpUser} />
+          <RoutesList
+            login={loginUser}
+            signUp={signUpUser}
+            editUser={editUser}
+          />
         </BrowserRouter>
       </div>
     </userContext.Provider>
