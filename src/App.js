@@ -12,13 +12,15 @@ import jwt_decode from "jwt-decode";
  * companies and job listings.
  *
  * Props - none
- * State - none
+ * State:
+ * - token: string
+ * - currentUser: {userDetails}
  *
- * App -> NavBar, RoutesList
+ * App -> NavBar, RoutesList, UserContext.Provider
  */
 
 function App() {
-  let initialUser = { userDetails: null, isLoading: true };
+  let initialUser = { userDetails: null };
 
   const [token, setToken] = useState();
   const [currentUser, setCurrentUser] = useState(initialUser);
@@ -33,7 +35,7 @@ function App() {
         const { username } = decodedToken;
         async function updateUser() {
           const user = await JoblyApi.getUserDetails(username);
-          setCurrentUser({ userDetails: user, isLoading: false });
+          setCurrentUser({ userDetails: user });
         }
         updateUser();
       }

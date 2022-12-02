@@ -1,22 +1,30 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import userContext from "./userContext";
-import { useContext } from "react";
-import "./SignUpForm.css";
+import "./LoginForm.css";
 
+/** Form for user to enter login information
+ *
+ * Props:
+ * - login: function
+ *
+ * States:
+ * - errors: []
+ * - formData: {username, password, firstName, lastName, email}
+ *
+ * RoutesList -> LoginForm
+ */
 function LoginForm({ login }) {
   const initialState = {
     username: "testuser_1",
     password: "password",
   };
 
-  const [error, setError] = useState();
+  const [errors, seterrors] = useState();
   const [formData, setFormData] = useState(initialState);
 
-  console.log("LoginForm", error);
+  console.log("LoginFormErrors", errors);
 
   const navigate = useNavigate();
-  const { token } = useContext(userContext);
 
   function handleChange(evt) {
     const { name, value } = evt.target;
@@ -32,8 +40,8 @@ function LoginForm({ login }) {
       await login(formData);
       navigate("/");
     } catch (err) {
-      setError(err);
-      console.log("ERROR", err);
+      seterrors(err);
+      console.log("errors", err);
     }
   }
 
@@ -57,7 +65,7 @@ function LoginForm({ login }) {
         ></input>
         <button>Login</button>
       </form>
-      {token.err && <p>{token.err}</p>}
+      {errors && errors.map((e, index) => <p key={index}>{e}</p>)}
     </div>
   );
 }

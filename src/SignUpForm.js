@@ -1,9 +1,18 @@
 import { useState } from "react";
 import "./SignUpForm.css";
-import userContext from "./userContext";
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
+/** New user signup form.
+ *
+ * Props:
+ * - signUp: function
+ *
+ * States:
+ * - errors: []
+ * - formData: {username, password}
+ *
+ * RoutesList -> SignUpForm
+ */
 function SignUpForm({ signUp }) {
   const initialState = {
     username: "testuser_1",
@@ -13,10 +22,11 @@ function SignUpForm({ signUp }) {
     email: "testuser5@gmail.com",
   };
 
+  const [errors, seterrors] = useState();
   const [formData, setFormData] = useState(initialState);
-  const { token } = useContext(userContext);
-  // const navigate = useNavigate();
-  console.log(token, "token in searchform");
+  const navigate = useNavigate();
+
+  console.log("SignUpErrors", errors);
 
   function handleChange(evt) {
     const { name, value } = evt.target;
@@ -26,10 +36,15 @@ function SignUpForm({ signUp }) {
     }));
   }
 
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    signUp(formData);
-    // navigate("/");
+    try {
+      await signUp(formData);
+      navigate("/");
+    } catch (err) {
+      seterrors(err);
+      console.log("errors", err);
+    }
   }
 
   return (
@@ -73,7 +88,7 @@ function SignUpForm({ signUp }) {
         ></input>
         <button>Submit</button>
       </form>
-      {token.err && <p>{token.err}</p>}
+      {errors && errors.map((e, index) => <p key={index}>{e}</p>)}
     </div>
   );
 }
