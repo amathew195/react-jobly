@@ -23,7 +23,7 @@ import { useContext } from "react";
  * App-> RoutesList
  */
 
-function RoutesList({ login, signUp, editUser }) {
+function RoutesList({ login, signUp, editUser, applyForJob, unapplyForJob }) {
   const { isLoggedIn } = useContext(userContext);
 
   return (
@@ -33,7 +33,15 @@ function RoutesList({ login, signUp, editUser }) {
         <>
           <Route path="/companies" element={<CompanyList />} />
           <Route path="/companies/:name" element={<CompanyDetail />} />
-          <Route path="/jobs" element={<JobList />} />
+          <Route
+            path="/jobs"
+            element={
+              <JobList
+                applyForJob={applyForJob}
+                unapplyForJob={unapplyForJob}
+              />
+            }
+          />
           <Route
             path="/profile"
             element={<ProfileForm editUser={editUser} />}

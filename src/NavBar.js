@@ -42,25 +42,36 @@ function NavBar({ logout }) {
           id="navbarNavAltMarkup"
         >
           <div className="navbar-nav">
-            {isLoggedIn && <NavLink className="nav-link" to="/companies">
-              Companies
-            </NavLink>}
-            {isLoggedIn && <NavLink className="nav-link" to="/jobs">
-              Jobs
-            </NavLink>}
-            {!isLoggedIn && <NavLink className="nav-link" to="/signup">
-              Signup
-            </NavLink>}
-            {!isLoggedIn && <NavLink className="nav-link" to="/login">
-              Login
-            </NavLink>}
-            {isLoggedIn && <NavLink onClick={logout} className="nav-link"
-              to="/">
-              Logout {userDetails.firstName}
-            </NavLink>}
-            {isLoggedIn && <NavLink className="nav-link" to="/profile">
-              Profile
-            </NavLink>}
+            {isLoggedIn && (
+              <NavLink className="nav-link" to="/companies">
+                Companies
+              </NavLink>
+            )}
+            {isLoggedIn && (
+              <NavLink className="nav-link" to="/jobs">
+                Jobs
+              </NavLink>
+            )}
+            {!isLoggedIn && (
+              <NavLink className="nav-link" to="/signup">
+                Signup
+              </NavLink>
+            )}
+            {!isLoggedIn && (
+              <NavLink className="nav-link" to="/login">
+                Login
+              </NavLink>
+            )}
+            {isLoggedIn && (
+              <NavLink className="nav-link" to="/profile">
+                Profile
+              </NavLink>
+            )}
+            {isLoggedIn && (
+              <NavLink onClick={logout} className="nav-link" to="/">
+                Logout {userDetails.firstName}
+              </NavLink>
+            )}
           </div>
         </div>
       </div>

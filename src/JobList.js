@@ -1,9 +1,8 @@
-
 import JoblyApi from "./api";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import JobCardList from "./JobCardList";
 import SearchForm from "./SearchForm";
-import './JobList.css';
+import "./JobList.css";
 
 /**
  * This component displays a list of all available jobs.
@@ -16,8 +15,7 @@ import './JobList.css';
  * RoutesList -> JobList -> SearchForm, JobCardList
  */
 
-function JobList() {
-
+function JobList({ applyForJob }) {
   const [jobsList, setJobsList] = useState({ data: null, isLoading: true });
   const [searchTerm, setSearchTerm] = useState("");
   console.log("Jobs List", jobsList);
@@ -35,20 +33,22 @@ function JobList() {
     setSearchTerm(term);
   }
 
-  useEffect(function uploadJobsOnSearch() {
-    async function uploadJobsData() {
-      setJobsList({ data: [], isLoading: true });
-      let jobs;
-      if (searchTerm === "") {
-        jobs = await JoblyApi.getJobs();
-      } else {
-        jobs = await JoblyApi.getJobs({ title: searchTerm });
+  useEffect(
+    function uploadJobsOnSearch() {
+      async function uploadJobsData() {
+        setJobsList({ data: [], isLoading: true });
+        let jobs;
+        if (searchTerm === "") {
+          jobs = await JoblyApi.getJobs();
+        } else {
+          jobs = await JoblyApi.getJobs({ title: searchTerm });
+        }
+        setJobsList({ data: jobs, isLoading: false });
       }
-      setJobsList({ data: jobs, isLoading: false });
-    }
-    uploadJobsData();
-  }, [searchTerm]);
-
+      uploadJobsData();
+    },
+    [searchTerm]
+  );
 
   if (jobsList.isLoading) {
     return (
@@ -64,7 +64,7 @@ function JobList() {
       {searchTerm && (
         <p className="JobList-search">Searching for: {searchTerm}</p>
       )}
-      <JobCardList jobs={jobsList.data} />
+      <JobCardList jobs={jobsList.data} applyForJob={applyForJob} />
     </div>
   );
 }

@@ -123,6 +123,16 @@ function App() {
     setCurrentUser({ userDetails: user, isLoading: false, err: null });
   }
 
+  async function applyForJob(username, jobId) {
+    const token = localStorage.getItem("token");
+    const applicationStatus = await JoblyApi.updateUserAndApplyToJob(
+      username,
+      jobId,
+      token
+    );
+    await updateUser(token);
+  }
+
   if (currentUser.err) {
     return <p className="App App-err">Error: Please try again later.</p>;
   }
@@ -138,6 +148,8 @@ function App() {
             login={loginUser}
             signUp={signUpUser}
             editUser={editUser}
+            applyForJob={applyForJob}
+            unapplyForJob={unapplyForJob}
           />
         </BrowserRouter>
       </div>

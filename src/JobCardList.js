@@ -1,4 +1,4 @@
-import JobCard from './JobCard';
+import JobCard from "./JobCard";
 /**
  * This component renders details about a specific job.
  *
@@ -11,11 +11,16 @@ import JobCard from './JobCard';
  * CompanyDetail -> JobCardList
  */
 
-function JobCardList({ jobs }) {
+function JobCardList({ jobs, applyForJob, unapplyForJob }) {
   return (
     <div>
-      {jobs.map(job => (
-        <JobCard key={job.id} job={job} />
+      {jobs.map((job) => (
+        <JobCard
+          key={job.id}
+          job={job}
+          applyForJob={applyForJob}
+          unapplyForJob={unapplyForJob}
+        />
       ))}
     </div>
   );

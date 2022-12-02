@@ -111,10 +111,33 @@ class JoblyApi {
    */
 
   static async editProfileAndGetUserDetails(username, data, token) {
-    console.log("username in api editProfile", username);
     this.token = token;
     let res = await this.request(`users/${username}`, data, "PATCH");
     return res.user;
+  }
+
+  /** Apply to job
+   *
+   * Takes in current username, the id of the job being applied to, and a token.
+   *
+   * Returns object {applied: jobId}
+   */
+  static async updateUserAndApplyToJob(username, jobId, token) {
+    this.token = token;
+    let res = await this.request(`users/${username}/jobs/${jobId}`, {}, "POST");
+    return res;
+  }
+
+  /** Unapply to job
+   *
+   * Takes in current username, the id of the job being applied to, and a token.
+   *
+   * Returns object {applied: jobId}
+   */
+  static async updateUserAndUnapplyToJob(username, jobId, token) {
+    this.token = token;
+    let res = await this.request(`users/${username}/jobs/${jobId}`, {}, "POST");
+    return res;
   }
 }
 
