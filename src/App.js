@@ -26,8 +26,7 @@ const initialUser = { userDetails: null, isLoading: true, err: null };
 
 function App() {
   const [currentUser, setCurrentUser] = useState(initialUser);
-  console.log(currentUser, "currentUser");
-
+  console.log(currentUser, "currentUser in App");
   const isLoggedIn = currentUser.userDetails ? true : false;
 
   useEffect(() => {
@@ -104,19 +103,24 @@ function App() {
     setCurrentUser(initialUser);
   }
 
-  async function editUser({ username, password, firstName, lastName, email }) {
+  /** Accepts form data as an object
+   * { username, firstName, lastName, email }
+   *
+   * Updates current user state with new user details.
+   *
+   */
+  async function editUser({ username, firstName, lastName, email }) {
     const token = localStorage.getItem("token");
     const user = await JoblyApi.editProfileAndGetUserDetails(
+      username,
       {
-        username,
-        password,
         firstName,
         lastName,
         email,
       },
       token
     );
-    setCurrentUser(user);
+    setCurrentUser({ userDetails: user, isLoading: false, err: null });
   }
 
   if (currentUser.err) {

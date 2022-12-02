@@ -5,14 +5,19 @@ import Alert from "./Alert";
 import userContext from "./userContext";
 import { useContext } from "react";
 
-/** New user signup form.
+/** User Profile form.
  *
  * Props:
- * - update: function
+ * - editUser: function that takes in form data
+ *  { username, firstName, lastName, email }
+ * and updates current user details with new data.
+ *
+ * Context:
+ * - userDetails: {applications, email, firstName, isAdmin, lastName, username}
  *
  * States:
  * - errors: []
- * - formData: {username, password}
+ * - formData: { username, firstName, lastName, email }
  *
  * RoutesList -> ProfileForm
  */
@@ -64,6 +69,7 @@ function ProfileForm({ editUser }) {
                     Username
                   </label>
                   <input
+                    disabled
                     id="username"
                     name="username"
                     value={formData.username}

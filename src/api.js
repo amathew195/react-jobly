@@ -98,6 +98,7 @@ class JoblyApi {
     let res = await this.request(`users/${username}`);
     return res.user;
   }
+
   /** Updates user details and returns object.
    * Returns user object:
    * {
@@ -110,6 +111,7 @@ class JoblyApi {
    */
 
   static async editProfileAndGetUserDetails(username, data, token) {
+    console.log("username in api editProfile", username);
     this.token = token;
     let res = await this.request(`users/${username}`, data, "PATCH");
     return res.user;
