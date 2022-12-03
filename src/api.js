@@ -136,7 +136,7 @@ class JoblyApi {
    */
   static async updateUserAndUnapplyToJob(username, jobId, token) {
     this.token = token;
-    let res = await this.request(`users/${username}/jobs/${jobId}`, {}, "POST");
+    let res = await this.request(`users/${username}/jobs/${jobId}`, {}, "DELETE");
     return res;
   }
 }

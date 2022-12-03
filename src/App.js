@@ -17,7 +17,7 @@ const initialUser = { userDetails: null, isLoading: true, err: null };
  *
  * Props - none
  * State:
- * - token: string
+ * - loggedInStatus: true, false, null
  * - currentUser: {userDetails: {applications, email, firstName, isAdmin,
  * lastName, username} isLoading: {boolean}}
  *
@@ -26,14 +26,19 @@ const initialUser = { userDetails: null, isLoading: true, err: null };
 
 function App() {
   const [currentUser, setCurrentUser] = useState(initialUser);
+  const [loggedInStatus, setLoggedInStatus] = useState(null);
   console.log(currentUser, "currentUser in App");
-  const isLoggedIn = currentUser.userDetails ? true : false;
 
   useEffect(() => {
-    const localToken = localStorage.getItem("token");
-    if (localToken) {
-      updateUser(localToken);
-    }
+    async function updateUserDetails() {
+      const localToken = localStorage.getItem("token");
+      if (localToken) {
+        await updateUser(localToken);
+      } else {
+        setLoggedInStatus(false);
+      }
+    };
+    updateUserDetails();
   }, []);
 
   /**
@@ -49,10 +54,13 @@ function App() {
     try {
       const user = await JoblyApi.getUserDetails(username, token);
       setCurrentUser({ userDetails: user, isLoading: false, err: null });
+      setLoggedInStatus(true);
     } catch (err) {
       console.error(err);
       setCurrentUser({ userDetails: null, isLoading: false, err });
+      setLoggedInStatus(false);
     }
+    console.log(loggedInStatus, "loggedInStatus after try/catch");
   }
 
   /**
@@ -99,6 +107,7 @@ function App() {
    * It accepts nothing and returns nothing.
    */
   function logoutUser() {
+    setLoggedInStatus(false);
     localStorage.clear();
     setCurrentUser(initialUser);
   }
@@ -133,13 +142,25 @@ function App() {
     await updateUser(token);
   }
 
+  async function unapplyForJob(username, jobId) {
+    const token = localStorage.getItem("token");
+    const applicationStatus = await JoblyApi.updateUserAndUnapplyToJob(
+      username,
+      jobId,
+      token
+    );
+    await updateUser(token);
+  }
+
   if (currentUser.err) {
     return <p className="App App-err">Error: Please try again later.</p>;
   }
 
+  if (loggedInStatus === null) return <p>Loading ...</p>;
+
   return (
     <userContext.Provider
-      value={{ userDetails: currentUser.userDetails, isLoggedIn }}
+      value={{ userDetails: currentUser.userDetails, loggedInStatus }}
     >
       <div className="App container-fluid">
         <BrowserRouter>

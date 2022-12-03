@@ -15,7 +15,7 @@ import "./JobList.css";
  * RoutesList -> JobList -> SearchForm, JobCardList
  */
 
-function JobList({ applyForJob }) {
+function JobList({ applyForJob, unapplyForJob }) {
   const [jobsList, setJobsList] = useState({ data: null, isLoading: true });
   const [searchTerm, setSearchTerm] = useState("");
   console.log("Jobs List", jobsList);
@@ -64,7 +64,10 @@ function JobList({ applyForJob }) {
       {searchTerm && (
         <p className="JobList-search">Searching for: {searchTerm}</p>
       )}
-      <JobCardList jobs={jobsList.data} applyForJob={applyForJob} />
+      <JobCardList
+        jobs={jobsList.data}
+        applyForJob={applyForJob}
+        unapplyForJob={unapplyForJob} />
     </div>
   );
 }

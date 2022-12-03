@@ -24,12 +24,12 @@ import { useContext } from "react";
  */
 
 function RoutesList({ login, signUp, editUser, applyForJob, unapplyForJob }) {
-  const { isLoggedIn } = useContext(userContext);
-
+  const { loggedInStatus } = useContext(userContext);
+  console.log("loggedInStatus in RoutesList", loggedInStatus);
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />
-      {isLoggedIn && (
+      {loggedInStatus && (
         <>
           <Route path="/companies" element={<CompanyList />} />
           <Route path="/companies/:name" element={<CompanyDetail />} />
@@ -48,7 +48,7 @@ function RoutesList({ login, signUp, editUser, applyForJob, unapplyForJob }) {
           />
         </>
       )}
-      {!isLoggedIn && (
+      {!loggedInStatus && (
         <>
           <Route path="/signup" element={<SignUpForm signUp={signUp} />} />
           <Route path="/login" element={<LoginForm login={login} />} />

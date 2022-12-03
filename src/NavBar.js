@@ -16,9 +16,9 @@ import { useContext } from "react";
  */
 
 function NavBar({ logout }) {
-  const { userDetails, isLoggedIn } = useContext(userContext);
+  const { userDetails, loggedInStatus } = useContext(userContext);
   console.log(userDetails, "userDetails in NavBar");
-  console.log(isLoggedIn, "isLoggedIn");
+  console.log(loggedInStatus, "isLoggedIn in NavBar");
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white">
@@ -42,32 +42,32 @@ function NavBar({ logout }) {
           id="navbarNavAltMarkup"
         >
           <div className="navbar-nav">
-            {isLoggedIn && (
+            {loggedInStatus && (
               <NavLink className="nav-link" to="/companies">
                 Companies
               </NavLink>
             )}
-            {isLoggedIn && (
+            {loggedInStatus && (
               <NavLink className="nav-link" to="/jobs">
                 Jobs
               </NavLink>
             )}
-            {!isLoggedIn && (
+            {!loggedInStatus && (
               <NavLink className="nav-link" to="/signup">
                 Signup
               </NavLink>
             )}
-            {!isLoggedIn && (
+            {!loggedInStatus && (
               <NavLink className="nav-link" to="/login">
                 Login
               </NavLink>
             )}
-            {isLoggedIn && (
+            {loggedInStatus && (
               <NavLink className="nav-link" to="/profile">
                 Profile
               </NavLink>
             )}
-            {isLoggedIn && (
+            {loggedInStatus && (
               <NavLink onClick={logout} className="nav-link" to="/">
                 Logout {userDetails.firstName}
               </NavLink>
