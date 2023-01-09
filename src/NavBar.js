@@ -10,7 +10,9 @@ import { useContext } from "react";
  *  - currentUser - if no current user = null, if current user = object;
  *    ex. {userDetails: {applications, email, firstName, isAdmin,
  *    lastName, username}, isLoading: {boolean}}
- *  - isLoggedIn - boolean
+ *
+ * Context:
+ * loggedInStatus - true,false,null
  *
  * App -> NavBar
  */
@@ -21,7 +23,7 @@ function NavBar({ logout }) {
   console.log(loggedInStatus, "isLoggedIn in NavBar");
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
         <NavLink className="navbar-brand px-2" to="/">
           Jobly
@@ -43,12 +45,12 @@ function NavBar({ logout }) {
         >
           <div className="navbar-nav">
             {loggedInStatus && (
-              <NavLink className="nav-link" to="/companies">
+              <NavLink className="nav-link" to="/companies" reloadDocument>
                 Companies
               </NavLink>
             )}
             {loggedInStatus && (
-              <NavLink className="nav-link" to="/jobs">
+              <NavLink className="nav-link" to="/jobs" reloadDocument>
                 Jobs
               </NavLink>
             )}
