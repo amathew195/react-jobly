@@ -35,9 +35,6 @@ Jobly is a full stack web application of a mock job board site where users can c
 ![alt text](https://github.com/amathew195/react-jobly/blob/main/public/Images/ReactComponentHierarchy.jpeg?raw=true)
 
 ## Install<a name="Install"></a>: 
-To set up and load the database: 
-
-    createdb jobly < jobly.sql
 
 This project uses Node.js for the back-end JavaScript runtime environment. To install the backend dependencies from the package.json file:
     
