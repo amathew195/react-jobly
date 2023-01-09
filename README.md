@@ -21,11 +21,11 @@ Jobly is a full stack web application of a mock job board site where users can c
 
 ## Tech stack<a name="Tech-stack"></a>: 
 
-### Backend:
+### Backend ([GitHub Repo](https://github.com/amathew195/express-jobly)):
 ![alt text](https://img.shields.io/badge/-Express-000000?logo=express&logoColor=white&style=for-the-badge)
 ![alt text](https://img.shields.io/badge/-Node.js-339933?logo=node.js&logoColor=white&style=for-the-badge)
 
-### Frontend ([GitHub Repo](https://github.com/amathew195/react-jobly)):
+### Frontend:
 ![alt text](https://img.shields.io/badge/-ReactJs-61DAFB?logo=react&logoColor=white&style=for-the-badge)
 
 ### Database Management: 
