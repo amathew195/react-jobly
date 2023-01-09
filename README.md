@@ -9,15 +9,16 @@ Jobly is a full stack web application of a mock job board site where users can c
 4. [Install](#Install)
 6. [Deployment](#Deployment)
 7. [Future features](#Future-features)
+8. [Contributers](#Contributers)
 
 ## Features<a name="Features"></a>:
-* Utilizes RESTful API
-* Users must create an account to access the application. A valid email is not required, but passwords are hashed and authenticated using bcrypt. 
-* Proper authorization checks are in place to ensure admin position can complete additional activities (ex. creating, updating, and deleting companies) and regular users cannot.  
-* Users can browse through library of companies and/or jobs with the option to filter using the search bar. 
-* "Apply" feature allows users to keep track of which jobs they have already applied for. 
-* Users can update their profile, but cannot change their username. Their valid password is needed to update the profile.
-* Getting information on a user, updating, or deleting a user is only permitted by either an admin, or by that user.
+* Logged out users have the option to sign up for an account. Authentication is manged by the backend. 
+* Logged in users have access to view companies and jobs, apply for jobs, and the option to update their profile.
+* Users can apply and unapply for jobs to keep track of application status.
+* Search fields are available for users to filter through companies/jobs. 
+* Token stored on localStorage so that a user is not automatically logged out upon page refresh.
+* Alerts are displayed to the user when signing up for an account and editing the user profile if minimum requirements are not met.
+
 
 ## Tech stack<a name="Tech-stack"></a>: 
 
@@ -63,8 +64,12 @@ Now build your frontend.
     surge 
 
 ## Future features<a name="Future-features"></a>:
-* Dynamic live search
-* Add additional search filters to search by number of employees, industry, position
-* Have job application forms available for the user to submit
-* Allow users to upload resume
-* Allow status updates for job. For example, ‘interested’, ‘applied’, ‘accepted’, ‘rejected’
+* Pagination for company and jobs list
+* Live search
+* Show a list of companies applied to
+* Add edit form for companies
+* Add job application forms
+
+## Contributers<a name="Contributers"></a>:
+* Ashley Mathew
+* Gordon Ball
