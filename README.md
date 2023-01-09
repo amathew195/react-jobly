@@ -5,9 +5,8 @@ Jobly is a full stack web application of a mock job board site where users can c
 # Table of Contents
 1. [Features](#Features)
 2. [Tech stack](#Tech-stack)
-3. [Database Entity Relationships](#Database-entity-relationships)
+3. [React Component Hierarchy](#React-component-hierarchy)
 4. [Install](#Install)
-5. [Testing](#Testing)
 6. [Deployment](#Deployment)
 7. [Future features](#Future-features)
 
@@ -32,8 +31,8 @@ Jobly is a full stack web application of a mock job board site where users can c
 ### Database Management: 
 ![alt text](https://img.shields.io/badge/-PostgresSQL-4169E1?logo=postgresql&logoColor=white&style=for-the-badge)
 
-## Database Entity Relationships<a name="Database-entity-relationships"></a>: 
-![alt text](https://github.com/amathew195/express-jobly/blob/main/images/Jobly%20-%20Entity%20Relationship%20Diagram%20-%20Cropped.jpeg?raw=true)
+## React Component Hierarchy<a name="React-component-hierarchy"></a>: 
+![alt text](https://github.com/amathew195/react-jobly/blob/main/public/Images/ReactComponentHierarchy.jpeg?raw=true)
 
 ## Install<a name="Install"></a>: 
 To set up and load the database: 
@@ -47,16 +46,6 @@ This project uses Node.js for the back-end JavaScript runtime environment. To in
 To start the sever (port 3001):
 
     npm start
-
-## Testing<a name="Testing"></a>:
-To run the tests:
-
-    jest -i
-    
-Note: Any time you run our tests here, you will need to use the -i flag for Jest, so that the tests run “in band” (in order, not at the same time)
-
-### Coverage Report: 
-![alt text](https://github.com/amathew195/express-jobly/blob/main/images/Jobly%20Test%20Coverage.jpg?raw=true)
 
 ## Deployment<a name="Deployment"></a>:
 ### Backend Deployment: 
