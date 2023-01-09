@@ -1,4 +1,4 @@
-# Jobly Backend
+# Jobly Frontend
 
 Jobly is a full stack web application of a mock job board site where users can create an account and login. Logged in users can browse through a list of companies and/or jobs with the ability to filter the list using the search bar. Each company has a list of job openings that a user can view and/or apply to. 
 
@@ -45,28 +45,22 @@ To start the sever (port 3001):
     npm start
 
 ## Deployment<a name="Deployment"></a>:
-### Backend Deployment: 
-We used ElephantSQL and Render to deploy our backend.
-
-In ElephantSQL, create a 'Tiny Turtle' instance and copy the URL of your new instance.
-
-Seed your database: 
-
-    pg_dump -O jobly | psql (url you copied here)
-
-In Render, create a new instance of “Web service”. 
-
-Connect to your repository and give your instance a name, which must be globally unique.
-
-Choose advanced, and enter environmental variables:
-
-    DATABASE_URL: URL from ElephantSQL
-    
-    SECRET_KEY: anything you want
-    
-Lastly select 'Create Web Service'
 
 ### Frontend Deployment: 
+We used Surge to deploy our front end. 
+
+First make sure Surge is installed: 
+
+    npm install -g surge
+
+Next, let’s make sure we define the environment variable for our frontend app.
+
+    REACT_APP_BASE_URL=YOUR_RENDER_BACKEND_URL npm run build
+
+Now build your frontend.
+    
+    cd build
+    surge 
 
 ## Future features<a name="Future-features"></a>:
 * Dynamic live search
