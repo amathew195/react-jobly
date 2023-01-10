@@ -33,7 +33,9 @@ function CompanyDetail() {
     getCompanyDetails();
   }, [name]);
 
-  if (companyDetails.isLoading) return <p>Loading...</p>;
+  if (companyDetails.isLoading){
+    return <p className="CompanyDetail-loading">Loading...</p>;
+  }
   if (companyDetails.err) return <Navigate to="/companies" />;
 
   return (
