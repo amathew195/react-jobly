@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 import Alert from "./Alert";
 
 const initialState = {
-  username: "testuser_1",
-  password: "password",
-  firstName: "test",
-  lastName: "user",
-  email: "testuser5@gmail.com",
+  username: "",
+  password: "",
+  firstName: "",
+  lastName: "",
+  email: "",
 };
 
 /** New user signup form.
