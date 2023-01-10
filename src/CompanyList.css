@@ -2,18 +2,6 @@
     min-height: 100vh;
 }
 
-.CompanyList-loading p {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    font-family: 'Heebo', sans-serif;
-    font-weight: 900;
-    font-size: 32px;
-    color: white;
-    text-shadow: 2px 2px 2px rgb(51, 49, 49);
-}
-
 .CompanyList-search {
     color: white;
     font-weight: bold;
