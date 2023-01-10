@@ -3,6 +3,7 @@ import JobCardList from './JobCardList';
 import { useEffect, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import './CompanyDetail.css';
+import Loading from './Loading'
 
 /**
  * This component displays jobs available at a specific company.
@@ -34,7 +35,7 @@ function CompanyDetail() {
   }, [name]);
 
   if (companyDetails.isLoading){
-    return <p className="CompanyDetail-loading">Loading...</p>;
+    return <p className="CompanyDetail-loading"><Loading/></p>;
   }
   if (companyDetails.err) return <Navigate to="/companies" />;
 

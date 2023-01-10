@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import JobCardList from "./JobCardList";
 import SearchForm from "./SearchForm";
 import "./JobList.css";
+import Loading from "./Loading";
 
 /**
  * This component displays a list of all available jobs.
@@ -53,7 +54,7 @@ function JobList({ applyForJob, unapplyForJob }) {
   if (jobsList.isLoading) {
     return (
       <div className="JobList-loading">
-        <p>Loading...</p>
+       <Loading/>
       </div>
     );
   }

@@ -6,6 +6,7 @@ import NavBar from "./NavBar";
 import userContext from "./userContext";
 import JoblyApi from "./api";
 import jwt_decode from "jwt-decode";
+import Loading from "./Loading";
 
 const initialUser = { userDetails: null, isLoading: true, err: null };
 
@@ -156,8 +157,9 @@ function App() {
   }
 
   if (loggedInStatus === null){
-    return <p className="App-loading">Loading ...</p>;
+    return <div><Loading/></div>
   }
+
   return (
     <userContext.Provider
       value={{ userDetails: currentUser.userDetails, loggedInStatus }}

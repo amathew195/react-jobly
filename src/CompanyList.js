@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import CompanyCard from "./CompanyCard";
 import SearchForm from "./SearchForm";
 import "./CompanyList.css";
+import Loading from "./Loading";
 
 /**
  * Company list renders a list of companies with a search form to search for
@@ -62,7 +63,7 @@ function CompanyList() {
   if (companiesList.isLoading) {
     return (
       <div className="CompanyList-loading">
-        <p>Loading...</p>
+        <Loading/>
       </div>
     );
   }
