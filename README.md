@@ -60,8 +60,8 @@ Next, let’s make sure we define the environment variable for our frontend app.
 
 Now build your frontend.
     
-    cd build
-    surge 
+    cp build/index.html build/200.html
+    surge build 
 
 ## Future features<a name="Future-features"></a>:
 * Pagination for company and jobs list
