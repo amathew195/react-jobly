@@ -41,7 +41,7 @@ This project uses Node.js for the back-end JavaScript runtime environment. To in
     
     npm install
 
-To start the sever (port 3001):
+To start the sever (port 3000):
 
     npm start
 
