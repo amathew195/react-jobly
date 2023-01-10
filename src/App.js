@@ -60,7 +60,6 @@ function App() {
       setCurrentUser({ userDetails: null, isLoading: false, err });
       setLoggedInStatus(false);
     }
-    console.log(loggedInStatus, "loggedInStatus after try/catch");
   }
 
   /**
@@ -156,8 +155,9 @@ function App() {
     return <p className="App App-err">Error: Please try again later.</p>;
   }
 
-  if (loggedInStatus === null) return <p>Loading ...</p>;
-
+  if (loggedInStatus === null){
+    return <p className="App-loading">Loading ...</p>;
+  }
   return (
     <userContext.Provider
       value={{ userDetails: currentUser.userDetails, loggedInStatus }}
