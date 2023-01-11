@@ -41,7 +41,7 @@ This project uses Node.js for the back-end JavaScript runtime environment. To in
     
     npm install
 
-To start the sever (port 3001):
+To start the sever (port 3000):
 
     npm start
 
@@ -60,8 +60,8 @@ Next, let’s make sure we define the environment variable for our frontend app.
 
 Now build your frontend.
     
-    cd build
-    surge 
+    cp build/index.html build/200.html
+    surge build 
 
 ## Future features<a name="Future-features"></a>:
 * Pagination for company and jobs list
