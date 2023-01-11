@@ -1,5 +1,7 @@
 .Loading{
     background-image: url("/public/adrian-infernus-GLf7bAwCdYg-unsplash.jpg");
+    background-size: cover;
+    background-attachment: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
