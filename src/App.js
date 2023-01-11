@@ -134,7 +134,7 @@ function App() {
 
   async function applyForJob(username, jobId) {
     const token = localStorage.getItem("token");
-    const applicationStatus = await JoblyApi.updateUserAndApplyToJob(
+    await JoblyApi.updateUserAndApplyToJob(
       username,
       jobId,
       token
@@ -144,7 +144,7 @@ function App() {
 
   async function unapplyForJob(username, jobId) {
     const token = localStorage.getItem("token");
-    const applicationStatus = await JoblyApi.updateUserAndUnapplyToJob(
+    await JoblyApi.updateUserAndUnapplyToJob(
       username,
       jobId,
       token
